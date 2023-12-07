@@ -23,11 +23,12 @@ class GameConfig:
         self.last_switch_time = time.time()
         self.draw_first_wing = True
         self.chickenX = 0
-        self.chickenY = 220
+        self.chickenY = 400
         self.amplitude = 20
         self.frame_count = 0
         self.bucketX = -50
         self.bucketY = 50
+        self.birdY_offset = 180
 
     # Getters
     def get_diamondY(self):

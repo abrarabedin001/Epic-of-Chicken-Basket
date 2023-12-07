@@ -20,8 +20,12 @@ def stage1animate():
                 config.set_speed(config.get_speed() * 2)
                 config.set_random_colors(random.randint(0, 255) / 255, random.randint(0, 255) / 255, random.randint(0, 255) / 255)
                 print('Score: ' + str(config.get_points()))
-                config.set_diamondX(random.randint(-240, 240))
-                config.set_diamondY(230)
+                
+                x_origin, y_origin = config.get_chicken_position()
+
+                y_origin = y_origin + config.birdY_offset
+                config.set_diamondY(y_origin)
+                config.set_diamondX(x_origin)
                 # config.set_diamond_position(random.randint(-240, 240), 230)
         if round(config.get_diamondY()) - 9 < config.get_boat_position()[1]:
             print('Game Over! Score:' + str(config.get_points()))

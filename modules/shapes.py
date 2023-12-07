@@ -99,6 +99,8 @@ def draw_chicken():
 def draw_chicken2():
     x_origin, y_origin = config.get_chicken_position()
 
+    y_origin = y_origin + config.birdY_offset
+
     # Set color for the chicken
     glColor3f(1, 1, 0)  # Yellow color
 
@@ -158,6 +160,7 @@ def toggle_chicken():
     #     draw_first_wing = True
 def update_chicken():
     x_origin, y_origin = config.get_chicken_position()
+    print('y_origin',y_origin)
     frame_count = config.get_frame_count()
     speed = config.get_speed()
     amplitude = config.get_amplitude()
@@ -170,12 +173,12 @@ def update_chicken():
     chickenX = x_origin + speed
     if chickenX >= 250:
         chickenX = -230
-    config.set_chicken_position(chickenX, y_origin)
+    config.set_chicken_position(chickenX, y_origin+220)
 
     # Oscillate chickenY using sine function
     chickenY = math.sin(frame_count * math.pi / 180) * amplitude
     config.set_chicken_position(chickenX, chickenY)
-    
+
 def draw_diamond():
     x_origin = config.get_diamondX()
     y_origin = config.get_diamondY()

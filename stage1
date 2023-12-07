@@ -4,43 +4,15 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from modules.stage1animate import stage1animate
-from modules.straightline import draw_any_line
-from modules.straightline import draw_points
 from modules.listeners import keyboardListener
 from modules.listeners import mouseListener
 from modules.listeners import specialKeyListener
 import math
 from modules.playPauseX import draw_pause, draw_play, draw_x
-from modules.shapes import draw_boat, draw_bucket, draw_chicken2,  toggle_chicken,draw_diamond,update_chicken
+from modules.shapes import draw_boat, draw_bucket, draw_chicken2, draw_diamond
+from modules.config import config
 
-W_Width, W_Height = 500, 500
-diamondY = 250
-diamondX = random.randint(-230,230)
-boatX = -250
-boatY = -230
-ballx = bally = 0
-speed = 0.01
-ball_size = 2
-points = 0
-create_new = False
-pause = False
-stop = False
-randomR = random.randint(0,255)/255
-randomG = random.randint(0,255)/255
-randomB = random.randint(0,255)/255
-end = False
-# Global variable to keep track of the last time we switched
-last_switch_time = time.time()
 
-# Variable to determine which chicken to draw
-draw_first_wing = True
-chickenX = 0
-chickenY = 220
-
-amplitude = 20
-frame_count = 0
-bucketX = -50
-bucketY = 50
 
 
 def display():
@@ -58,7 +30,7 @@ def display():
     # //3. Which direction is the camera's UP direction?
     gluLookAt(0, 0, 200, 0, 0, 0, 0, 1, 0)
     glMatrixMode(GL_MODELVIEW)
-    global ballx, bally, ball_size
+    
     draw_x()
     draw_pause()
     draw_play()
@@ -67,13 +39,13 @@ def display():
     draw_bucket()    
     draw_chicken2()
 
-    if (create_new):
-        m, n = create_new
+    if (config.create_new):
+        m, n = config.create_new
         glBegin(GL_POINTS)
         glColor3f(0.7, 0.8, 0.6)
         glVertex2f(m, n)
         glEnd()
-    if (end):
+    if (config.end):
         return
     glutSwapBuffers()
 
@@ -92,7 +64,7 @@ def init():
     # //far distance
 
 glutInit()
-glutInitWindowSize(W_Width, W_Height)
+glutInitWindowSize(config.W_Width, config.W_Height)
 glutInitWindowPosition(0, 0)
 glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB)  # //Depth, Double buffer, RGB color
 
@@ -100,7 +72,10 @@ glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB)  # //Depth, Double buff
 wind = glutCreateWindow(b"OpenGL Coding Practice")
 init()
 
-glutDisplayFunc(display)  # display callback function
+glutDisplayFunc(display) 
+
+
+ # display callback function
 glutIdleFunc(stage1animate)  # what you want to do in the idle time (when no drawing is occuring)
 
 glutKeyboardFunc(keyboardListener)

@@ -30,6 +30,7 @@ draw_first_wing = True
 chickenX = 0
 chickenY = 0
 # speed = 1
+amplitude = 20
 frame_count = 0
 
 
@@ -532,7 +533,7 @@ def update_chicken():
 
     # Oscillate chickenY using sine function
     # The multiplier for frame_count controls the frequency of oscillation
-    chickenY = math.sin(frame_count * math.pi / 180) * 100
+    chickenY = math.sin(frame_count * math.pi / 180) * amplitude
 
 def display():
     # //clear the display

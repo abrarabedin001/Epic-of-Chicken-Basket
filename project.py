@@ -1,5 +1,5 @@
 import random
-
+import time
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
@@ -22,10 +22,15 @@ randomR = random.randint(0,255)/255
 randomG = random.randint(0,255)/255
 randomB = random.randint(0,255)/255
 end = False
+# Global variable to keep track of the last time we switched
+last_switch_time = time.time()
 
+# Variable to determine which chicken to draw
+draw_first_wing = True
 chickenX = 0
 chickenY = 0
-
+# speed = 1
+frame_count = 0
 
 
 
@@ -382,7 +387,19 @@ def draw_bucket():
     draw_any_line(x_origin - 20, y_origin + 40, x_origin + 20, y_origin + 40)
     draw_any_line(x_origin - 20, y_origin + 40, x_origin - 20, y_origin + 30)
     draw_any_line(x_origin + 20, y_origin + 40, x_origin + 20, y_origin + 30)
-
+def draw_ellipse(x_origin, y_origin, x_radius, y_radius, start_angle, end_angle, angle_step):
+    for angle in range(start_angle, end_angle, angle_step):
+        x = x_origin + x_radius * math.cos(math.radians(angle))
+        y = y_origin + y_radius * math.sin(math.radians(angle))
+        draw_points(x, y,1)
+def draw_wings2(x_origin, y_origin):
+    # Adjust the wing size and angles as needed
+    wing_radius_x = 20
+    wing_radius_y = 30
+    # Left wing
+    draw_ellipse(x_origin - wing_radius_x, y_origin, wing_radius_x, wing_radius_y, 45, 135, 5)
+    # Right wing
+    draw_ellipse(x_origin + wing_radius_x, y_origin, wing_radius_x, wing_radius_y, 45, 135, 5)
 
 def draw_boat():
     global boatX,boatY
@@ -486,10 +503,36 @@ def draw_chicken2():
         next_x = eye_x + 3 * math.cos(math.radians(angle + 30))
         next_y = eye_y + 3 * math.sin(math.radians(angle + 30))
         draw_any_line(x, y, next_x, next_y) 
-    draw_wings(x_origin, y_origin)
+    # draw_wings(x_origin, y_origin)
+    if draw_first_wing==True:
+        draw_wings2(x_origin, y_origin)
+    else:
+        draw_wings(x_origin, y_origin)
+def toggle_chicken():
+    global last_switch_time, draw_first_wing
+    current_time = time.time()
+    print(current_time - last_switch_time)
+    if current_time - last_switch_time >= 0.25:
+        draw_first_wing = not draw_first_wing
+        # Update the last switch time to the current time
+        last_switch_time = current_time
+        
+    # else:
+    #     draw_first_wing = True
+def update_chicken():
+    global chickenX, chickenY, frame_count
 
+    # Update the frame count
+    frame_count += 1
 
+    # Update chickenX
+    chickenX = (chickenX + 1 + speed)
+    if chickenX >= 250:
+        chickenX = -230
 
+    # Oscillate chickenY using sine function
+    # The multiplier for frame_count controls the frequency of oscillation
+    chickenY = math.sin(frame_count * math.pi / 180) * 100
 
 def display():
     # //clear the display
@@ -539,16 +582,21 @@ def display():
 def animate():
     # //codes for any changes in Models, Camera
     glutPostRedisplay()
-    global ballx, bally, speed,diamondY,pause, points,diamondX,stop,randomR,randomG,randomB
+    global ballx,chickenX,chickenY, bally, speed,diamondY,pause, points,diamondX,stop,randomR,randomG,randomB
     global end
     # Your animation code here
-
+    toggle_chicken()
     # Check if the program should end
     if end:
         glutLeaveMainLoop()
 
     if(pause==False and stop == False):
         diamondY =(diamondY - speed)
+
+        update_chicken()
+
+
+
 
 
 

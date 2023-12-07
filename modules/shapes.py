@@ -3,15 +3,13 @@ import time
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-from modules.straightline import draw_points
+from modules.straightline import draw_points,draw_any_line
+from modules.config import config
 
-from project import draw_any_line
 
 
 def draw_bucket():
-    global bucketX, bucketY
-    x_origin = bucketX
-    y_origin = bucketY
+    x_origin, y_origin = config.get_bucket_position()
 
     # Set bucket color
     glColor3f(0.5, 0.5, 0.5)  # Grey color
@@ -49,9 +47,8 @@ def draw_wings2(x_origin, y_origin):
     draw_ellipse(x_origin + wing_radius_x, y_origin, wing_radius_x, wing_radius_y, 45, 135, 5)
 
 def draw_boat():
-    global boatX,boatY,stop
-    x_origin = boatX
-    y_origin = boatY
+    x_origin, y_origin = config.get_boat_position()
+    stop = config.get_stop_status()
     if(stop==False):
         glColor3f(255/255, 255 / 255, 255 / 255)
     else:
@@ -79,9 +76,7 @@ def draw_wings(x_origin, y_origin):
         next_y = y_origin - 10 + 20 * math.sin(math.radians(angle + 10))
         draw_any_line(x, y, next_x, next_y)
 def draw_chicken():
-    global chickenX, chickenY
-    x_origin = chickenX
-    y_origin = chickenY
+    x_origin, y_origin = config.get_chicken_position()
 
     # Set chicken color
     glColor3f(1.0, 1.0, 0.0)  # Yellow color
@@ -102,9 +97,9 @@ def draw_chicken():
     draw_any_line(x_origin + 5, y_origin - 30, x_origin + 5, y_origin - 40)
     draw_any_line(x_origin + 15, y_origin - 30, x_origin + 15, y_origin - 40)
 def draw_chicken2():
-    global chickenX, chickenY
-    x_origin = chickenX +30
-    y_origin = chickenY +30
+    x_origin, y_origin = config.get_chicken_position()
+
+    y_origin = y_origin + config.birdY_offset
 
     # Set color for the chicken
     glColor3f(1, 1, 0)  # Yellow color
@@ -151,39 +146,43 @@ def draw_chicken2():
         next_y = eye_y + 3 * math.sin(math.radians(angle + 30))
         draw_any_line(x, y, next_x, next_y) 
     # draw_wings(x_origin, y_origin)
-    if draw_first_wing==True:
+    if config.draw_first_wing==True:
         draw_wings2(x_origin, y_origin)
     else:
         draw_wings(x_origin, y_origin)
 def toggle_chicken():
-    global last_switch_time, draw_first_wing
     current_time = time.time()
-    print(current_time - last_switch_time)
-    if current_time - last_switch_time >= 0.25:
-        draw_first_wing = not draw_first_wing
-        # Update the last switch time to the current time
-        last_switch_time = current_time
+    if current_time - config.get_last_switch_time() >= 0.25:
+        config.set_draw_first_wing_status(not config.get_draw_first_wing_status())
+        config.set_last_switch_time(current_time)
         
     # else:
     #     draw_first_wing = True
 def update_chicken():
-    global chickenX, chickenY, frame_count,speed,amplitude
+    x_origin, y_origin = config.get_chicken_position()
+    print('y_origin',y_origin)
+    frame_count = config.get_frame_count()
+    speed = config.get_speed()
+    amplitude = config.get_amplitude()
 
     # Update the frame count
     frame_count += 1
+    config.set_frame_count(frame_count)
 
-    # Update chickenX
-    chickenX = (chickenX + 1 + speed)
+    # Update chickenX and check bounds
+    chickenX = x_origin + speed
     if chickenX >= 250:
         chickenX = -230
+    config.set_chicken_position(chickenX, y_origin+220)
 
     # Oscillate chickenY using sine function
-    # The multiplier for frame_count controls the frequency of oscillation
     chickenY = math.sin(frame_count * math.pi / 180) * amplitude
+    config.set_chicken_position(chickenX, chickenY)
+
 def draw_diamond():
-    global diamondY,randomR,randomG,randomB
-    x_origin = diamondX
-    y_origin = diamondY
+    x_origin = config.get_diamondX()
+    y_origin = config.get_diamondY()
+    randomR, randomG, randomB = config.get_random_colors()
     # 0,128,
 
     glColor3f(randomR, randomG, randomB)
@@ -193,3 +192,68 @@ def draw_diamond():
     draw_any_line(x_origin , y_origin, x_origin +9, y_origin -9)
     draw_any_line(x_origin +10, y_origin+9,x_origin+18, y_origin+1  )
     draw_any_line(x_origin +10, y_origin-9 ,x_origin+18, y_origin-1)
+
+
+def draw_circle(x_center, y_center, radius, boundary_x_min, boundary_x_max, boundary_y_min, boundary_y_max):
+    x = radius
+    y = 0
+    d = 1 - radius  # Initial value of the decision parameter
+
+    # Create empty lists to store the coordinates of the circle
+    x_coords = []
+    y_coords = []
+
+    # Plot the initial point on the circle
+    x_coords.append(x + x_center)
+    y_coords.append(y + y_center)
+
+    # Iterate while the x coordinate is greater than or equal to y coordinate
+    while x > y:
+        y += 1
+
+        # Mid-point is inside or on the perimeter of the circle
+        if d <= 0:
+            d = d + 2 * y + 1
+        else:
+            x -= 1
+            d = d + 2 * y - 2 * x + 1
+
+        # Calculate the coordinates based on the center
+        x_pos = x + x_center
+        y_pos = y + y_center
+
+        # Check if any point of the perimeter touches the boundary
+        if (
+            x_center + radius > boundary_x_max or
+            x_center - radius < boundary_x_min or
+            y_center + radius > boundary_y_max or
+            y_center - radius < boundary_y_min
+        ):
+            return None, None  # Perimeter touches the boundary, return None
+
+        # All the perimeter points have already been printed
+        # print("fruff happens")
+        # print(x_center,y_center)
+        if x < y:
+            break
+
+        # Plot the points of the circle in all octants
+        x_coords.append(x + x_center)
+        y_coords.append(y + y_center)
+        x_coords.append(-x + x_center)
+        y_coords.append(y + y_center)
+        x_coords.append(x + x_center)
+        y_coords.append(-y + y_center)
+        x_coords.append(-x + x_center)
+        y_coords.append(-y + y_center)
+        x_coords.append(y + x_center)
+        y_coords.append(x + y_center)
+        x_coords.append(-y + x_center)
+        y_coords.append(x + y_center)
+        x_coords.append(y + x_center)
+        y_coords.append(-x + y_center)
+        x_coords.append(-y + x_center)
+        y_coords.append(-x + y_center)
+
+    # Plot the circle using the coordinates
+    return x_coords, y_coords

@@ -4,13 +4,15 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from modules.stage1animate import stage1animate
-from modules.listeners import keyboardListener
+from modules.listeners import keyboardListener, mouseListener_stage2
 from modules.listeners import mouseListener
 from modules.listeners import specialKeyListener
 import math
 from modules.playPauseX import draw_pause, draw_play, draw_x
-from modules.shapes import draw_boat, draw_bucket, draw_chicken2, draw_diamond
+from modules.shapes import draw_boat, draw_bucket, draw_chicken2, draw_circle, draw_diamond
 from modules.config import config
+from modules.stage2animate import stage2animate
+from modules.straightline import draw_points
 
 
 
@@ -38,6 +40,21 @@ def display():
     draw_boat()
     draw_bucket()    
     draw_chicken2()
+
+    print(config.centers)
+    for r in range(len(config.centers) - 1, -1, -1):
+        x_origin = config.centers[r][0]
+        y_origin = config.centers[r][1]
+
+        x_arr, y_arr = draw_circle(x_origin, y_origin, config.radiuses[r], config.boundary_x_min, config.boundary_x_max, config.boundary_y_min,
+                                   config.boundary_y_max)
+
+        if x_arr is None:
+            del config.radiuses[r]
+            del config.centers[r]  # Remove the element from the list
+        else:
+            for i in range(len(x_arr)):
+                draw_points(x_arr[i], y_arr[i], 3)
 
     if (config.create_new):
         m, n = config.create_new
@@ -76,11 +93,11 @@ glutDisplayFunc(display)
 
 
  # display callback function
-glutIdleFunc(stage1animate)  # what you want to do in the idle time (when no drawing is occuring)
+glutIdleFunc(stage2animate)  # what you want to do in the idle time (when no drawing is occuring)
 
 glutKeyboardFunc(keyboardListener)
 glutSpecialFunc(specialKeyListener)
-glutMouseFunc(mouseListener)
+glutMouseFunc(mouseListener_stage2)
 
 glutMainLoop()
     # return something

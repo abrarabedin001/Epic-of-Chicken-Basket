@@ -53,3 +53,38 @@ def mouseListener(button, state, x, y):
     elif button == GLUT_RIGHT_BUTTON and state == GLUT_DOWN:
         config.create_new = convert_coordinate(x, y)
     glutPostRedisplay()
+
+
+def mouseListener_stage2(button, state, x, y):	#/#/x, y is the x-y of the screen (2D)
+    
+    if button==GLUT_LEFT_BUTTON and state==GLUT_DOWN:
+         # 		// 2 times?? in ONE click? -- solution is checking DOWN or UP
+
+        c_X, c_y = convert_coordinate(x, y)
+        config.ballx, config.bally = c_X, c_y
+
+        if -20 <= x-250 <= 20 and 210 <= 250-y <= 240:
+            config.pause = not config.pause
+        elif -230 <= x-250 <= -210 and 210 <= 250-y <= 240:
+            config.stop = False
+            config.diamondY = 230
+            config.speed = 0.01
+            print(f"Starting Over! Score: {config.points}")
+            config.end = False
+            config.points = 0
+            config.diamondX = random.randint(-230, 230)
+        elif 210 <= x-250 <= 250 and 210 <= 250-y <= 240:
+            print(f"Goodbye! Score: {config.points}")
+            config.end = True
+        
+    if button==GLUT_RIGHT_BUTTON:
+        if state == GLUT_DOWN: 	
+            create_new = convert_coordinate(x,y)
+            c_x, c_y = convert_coordinate(x, y)
+            if(config.pause==False):
+                config.centers.append([round(c_x),round(c_y)])
+                config.radiuses.append(10)
+    # case GLUT_MIDDLE_BUTTON:
+    #     //........
+
+    glutPostRedisplay()

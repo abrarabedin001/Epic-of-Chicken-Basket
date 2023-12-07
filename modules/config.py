@@ -29,6 +29,12 @@ class GameConfig:
         self.bucketX = -50
         self.bucketY = 50
         self.birdY_offset = 180
+        self.centers = []
+        self.radiuses = []
+        self.boundary_x_min = -250
+        self.boundary_x_max = 250
+        self.boundary_y_min = -250
+        self.boundary_y_max = 250
 
     # Getters
     def get_diamondY(self):

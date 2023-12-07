@@ -192,3 +192,68 @@ def draw_diamond():
     draw_any_line(x_origin , y_origin, x_origin +9, y_origin -9)
     draw_any_line(x_origin +10, y_origin+9,x_origin+18, y_origin+1  )
     draw_any_line(x_origin +10, y_origin-9 ,x_origin+18, y_origin-1)
+
+
+def draw_circle(x_center, y_center, radius, boundary_x_min, boundary_x_max, boundary_y_min, boundary_y_max):
+    x = radius
+    y = 0
+    d = 1 - radius  # Initial value of the decision parameter
+
+    # Create empty lists to store the coordinates of the circle
+    x_coords = []
+    y_coords = []
+
+    # Plot the initial point on the circle
+    x_coords.append(x + x_center)
+    y_coords.append(y + y_center)
+
+    # Iterate while the x coordinate is greater than or equal to y coordinate
+    while x > y:
+        y += 1
+
+        # Mid-point is inside or on the perimeter of the circle
+        if d <= 0:
+            d = d + 2 * y + 1
+        else:
+            x -= 1
+            d = d + 2 * y - 2 * x + 1
+
+        # Calculate the coordinates based on the center
+        x_pos = x + x_center
+        y_pos = y + y_center
+
+        # Check if any point of the perimeter touches the boundary
+        if (
+            x_center + radius > boundary_x_max or
+            x_center - radius < boundary_x_min or
+            y_center + radius > boundary_y_max or
+            y_center - radius < boundary_y_min
+        ):
+            return None, None  # Perimeter touches the boundary, return None
+
+        # All the perimeter points have already been printed
+        # print("fruff happens")
+        # print(x_center,y_center)
+        if x < y:
+            break
+
+        # Plot the points of the circle in all octants
+        x_coords.append(x + x_center)
+        y_coords.append(y + y_center)
+        x_coords.append(-x + x_center)
+        y_coords.append(y + y_center)
+        x_coords.append(x + x_center)
+        y_coords.append(-y + y_center)
+        x_coords.append(-x + x_center)
+        y_coords.append(-y + y_center)
+        x_coords.append(y + x_center)
+        y_coords.append(x + y_center)
+        x_coords.append(-y + x_center)
+        y_coords.append(x + y_center)
+        x_coords.append(y + x_center)
+        y_coords.append(-x + y_center)
+        x_coords.append(-y + x_center)
+        y_coords.append(-x + y_center)
+
+    # Plot the circle using the coordinates
+    return x_coords, y_coords

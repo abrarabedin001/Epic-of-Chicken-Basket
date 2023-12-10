@@ -230,7 +230,13 @@ def draw_circle(x_center, y_center, radius, boundary_x_min, boundary_x_max, boun
             y_center - radius < boundary_y_min
         ):
             return None, None  # Perimeter touches the boundary, return None
-
+        distanceFromEgg = math.sqrt((config.diamondX+5 - x_center) ** 2 + (config.diamondY - y_center) ** 2)
+        if( distanceFromEgg<=radius ):
+            config.set_diamondX(0)
+            config.diamondX = config.chickenX  
+            config.diamondY = config.chickenY +config.birdY_offset
+            config.set_points(config.get_points()+1)
+            return None, None
         # All the perimeter points have already been printed
         # print("fruff happens")
         # print(x_center,y_center)

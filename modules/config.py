@@ -5,8 +5,8 @@ import time
 class GameConfig:
     def __init__(self):
         self.W_Width, self.W_Height = 500, 500
-        self.diamondY = 250
-        self.diamondX = random.randint(-230, 230)
+        self.diamondY = 180
+        self.diamondX = 0
         self.boatX = -250
         self.boatY = -230
         self.ballx = self.bally = 0

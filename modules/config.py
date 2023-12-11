@@ -10,7 +10,7 @@ class GameConfig:
         self.boatX = -250
         self.boatY = -230
         self.ballx = self.bally = 0
-        self.speed = 0.01
+        self.speed = 1
         self.ball_size = 2
         self.points = 0
         self.create_new = False

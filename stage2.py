@@ -38,7 +38,7 @@ def display():
     draw_play()
     draw_diamond()
     draw_boat()
-    draw_bucket()    
+    # draw_bucket()    
     draw_chicken2()
 
     print(config.centers)

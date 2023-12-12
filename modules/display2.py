@@ -3,18 +3,16 @@ import time
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-from modules.stage1animate import stage1animate
-from modules.listeners import keyboardListener, mouseListener_stage2
-from modules.listeners import mouseListener_stage1
-from modules.listeners import specialKeyListener
+
 import math
 from modules.playPauseX import draw_pause, draw_play, draw_x
-from modules.shapes import draw_boat, draw_bucket, draw_chicken2, draw_circle, draw_diamond
+from modules.shapes import draw_boat,  draw_chicken2, draw_circle, draw_diamond
 from modules.config import config
-from modules.stage2animate import stage2animate
-from modules.straightline import draw_points
+from modules.straightline import  draw_points
 
-def display():
+
+
+def display2():
     # //clear the display
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glClearColor(0, 0, 0, 0);  # //color black
@@ -64,42 +62,4 @@ def display():
         config.speed = 1
         glutLeaveMainLoop()
     glutSwapBuffers()
-
-
-def init():
-    # //clear the screen
-    glClearColor(0, 0, 0, 0)
-    # //load the PROJECTION matrix
-    glMatrixMode(GL_PROJECTION)
-    # //initialize the matrix
-    glLoadIdentity()
-    # //give PERSPECTIVE parameters
-    gluPerspective(104, 1, 1, 1000.0)
-    # **(important)**aspect ratio that determines the field of view in the X direction (horizontally). The bigger this angle is, the more you can see of the world - but at the same time, the objects you can see will become smaller.
-    # //near distance
-    # //far distance
-
-glutInit()
-glutInitWindowSize(config.W_Width, config.W_Height)
-glutInitWindowPosition(0, 0)
-glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB)  # //Depth, Double buffer, RGB color
-
-# glutCreateWindow("My OpenGL Program")
-wind = glutCreateWindow(b"OpenGL Coding Practice")
-init()
-
-glutDisplayFunc(display) 
-
-
- # display callback function
-glutIdleFunc(stage2animate)  # what you want to do in the idle time (when no drawing is occuring)
-
-glutKeyboardFunc(keyboardListener)
-glutSpecialFunc(specialKeyListener)
-glutMouseFunc(mouseListener_stage2)
-
-glutMainLoop()
-    # return something
-    # The main loop of OpenGL
-
 

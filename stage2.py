@@ -29,7 +29,7 @@ def display():
     # //now give three info
     # //1. where is the camera (viewer)?
     # //2. where is the camera looking?
-    # //3. Which direction is the camera's UP direction?
+
     gluLookAt(0, 0, 200, 0, 0, 0, 0, 1, 0)
     glMatrixMode(GL_MODELVIEW)
     

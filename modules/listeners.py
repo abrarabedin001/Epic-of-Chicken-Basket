@@ -41,12 +41,13 @@ def mouseListener(button, state, x, y):
             config.pause = not config.pause
         elif -230 <= x-250 <= -210 and 210 <= 250-y <= 240:
             config.stop = False
-            config.diamondY = 230
-            config.speed = 0.01
+            config.diamondX = config.chickenX
+            config.diamondY = config.chickenY+config.birdY_offset
+            config.speed = 1
             print(f"Starting Over! Score: {config.points}")
             config.end = False
             config.points = 0
-            config.diamondX = random.randint(-230, 230)
+        
         elif 210 <= x-250 <= 250 and 210 <= 250-y <= 240:
             print(f"Goodbye! Score: {config.points}")
             config.end = True
@@ -67,12 +68,13 @@ def mouseListener_stage2(button, state, x, y):	#/#/x, y is the x-y of the screen
             config.pause = not config.pause
         elif -230 <= x-250 <= -210 and 210 <= 250-y <= 240:
             config.stop = False
-            config.diamondY = 230
-            config.speed = 0.01
+            config.diamondX = config.chickenX
+            config.diamondY = config.chickenY+config.birdY_offset
+            config.speed = 1
             print(f"Starting Over! Score: {config.points}")
             config.end = False
             config.points = 0
-            config.diamondX = random.randint(-230, 230)
+            
         elif 210 <= x-250 <= 250 and 210 <= 250-y <= 240:
             print(f"Goodbye! Score: {config.points}")
             config.end = True

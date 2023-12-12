@@ -64,7 +64,8 @@ def display():
         glVertex2f(m, n)
         glEnd()
     if (config.end):
-        return
+        config.speed = 1
+        glutLeaveMainLoop()
     glutSwapBuffers()
 
 

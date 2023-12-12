@@ -26,7 +26,7 @@ def specialKeyListener(key, x, y):
     if key == GLUT_KEY_DOWN:
         config.speed /= 2
     if not config.pause and not config.stop:
-        if key == GLUT_KEY_RIGHT and config.boatX + 60 <= 249:
+        if key == GLUT_KEY_RIGHT and config.boatX + 100 <= 249:
             config.boatX += 5
         if key == GLUT_KEY_LEFT and config.boatX >= -249:
             config.boatX -= 5

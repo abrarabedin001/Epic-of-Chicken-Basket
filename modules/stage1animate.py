@@ -17,6 +17,8 @@ def stage1animate():
         if round(config.get_diamondX()) >= round(config.get_boat_position()[0]) and round(config.get_diamondX()) <= round(config.get_boat_position()[0]) + 100:
             if round(config.get_diamondY()) - 9 <= config.get_boat_position()[1] + 50 and round(config.get_diamondY()) - 9 >= config.get_boat_position()[1]:
                 config.set_points(config.get_points() + 1)
+                if(config.points>=2):
+                    config.stage=2
                 config.set_speed(config.get_speed() * 1.1)
                 config.set_random_colors(random.randint(0, 255) / 255, random.randint(0, 255) / 255, random.randint(0, 255) / 255)
                 print('Score: ' + str(config.get_points()))
@@ -26,12 +28,7 @@ def stage1animate():
                 y_origin = y_origin + config.birdY_offset
                 config.set_diamondY(y_origin)
                 config.set_diamondX(x_origin)
-            else:
-                x_origin, y_origin = config.get_chicken_position()
-
-                y_origin = y_origin + config.birdY_offset
-                config.set_diamondY(y_origin)
-                config.set_diamondX(x_origin)
+            
                 
                 # config.set_diamond_position(random.randint(-240, 240), 230)
         if round(config.get_diamondY()) - 9 < config.get_boat_position()[1]:

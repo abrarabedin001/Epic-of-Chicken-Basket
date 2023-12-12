@@ -35,6 +35,7 @@ class GameConfig:
         self.boundary_x_max = 250
         self.boundary_y_min = -250
         self.boundary_y_max = 250
+        self.stage = 1
 
     # Getters
     def get_diamondY(self):

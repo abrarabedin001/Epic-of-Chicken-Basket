@@ -32,7 +32,7 @@ def specialKeyListener(key, x, y):
             config.boatX -= 5
     glutPostRedisplay()
 
-def mouseListener(button, state, x, y):
+def mouseListener_stage1(button, state, x, y):
     if button == GLUT_LEFT_BUTTON and state == GLUT_DOWN:
         c_X, c_y = convert_coordinate(x, y)
         config.ballx, config.bally = c_X, c_y

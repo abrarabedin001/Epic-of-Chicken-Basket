@@ -22,7 +22,7 @@ randomR = random.randint(0,255)/255
 randomG = random.randint(0,255)/255
 randomB = random.randint(0,255)/255
 end = False
-# Global variable to keep track of the last time we switched
+# Hello I am Shabab
 last_switch_time = time.time()
 
 # Variable to determine which chicken to draw

@@ -40,8 +40,9 @@ def draw_circle(x_center, y_center, radius, boundary_x_min, boundary_x_max, boun
             x_center + radius > boundary_x_max or
             x_center - radius < boundary_x_min or
             y_center + radius > boundary_y_max or
-            y_center - radius < boundary_y_min
-        ):
+            y_center - radius < boundary_y_min 
+        ):  
+            print('Score: ' + str(config.get_points()))
             return None, None  # Perimeter touches the boundary, return None
         distanceFromEgg = math.sqrt((config.diamondX+5 - x_center) ** 2 + (config.diamondY - y_center) ** 2)
         if( distanceFromEgg<=radius ):

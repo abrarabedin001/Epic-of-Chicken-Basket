@@ -41,7 +41,7 @@ def display():
     # draw_bucket()    
     draw_chicken2()
 
-    print(config.centers)
+    
     for r in range(len(config.centers) - 1, -1, -1):
         x_origin = config.centers[r][0]
         y_origin = config.centers[r][1]
@@ -50,6 +50,7 @@ def display():
                                    config.boundary_y_max)
 
         if x_arr is None:
+            print('Score: ' + str(config.get_points()))
             del config.radiuses[r]
             del config.centers[r]  # Remove the element from the list
         else:

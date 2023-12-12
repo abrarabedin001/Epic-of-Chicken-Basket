@@ -153,3 +153,58 @@ def draw_any_line(x0, y0, x1, y1):
         draw_points(point[0], point[1], 1)
     return line_points
 
+
+
+def draw_circle2(x_center, y_center, radius):
+    x = radius
+    y = 0
+    d = 1 - radius  # Initial value of the decision parameter
+
+    # Create empty lists to store the coordinates of the circle
+    x_coords = []
+    y_coords = []
+
+    # Plot the initial point on the circle
+    x_coords.append(x + x_center)
+    y_coords.append(y + y_center)
+
+    # Iterate while the x coordinate is greater than or equal to y coordinate
+    while x > y:
+        y += 1
+
+        # Mid-point is inside or on the perimeter of the circle
+        if d <= 0:
+            d = d + 2 * y + 1
+        else:
+            x -= 1
+            d = d + 2 * y - 2 * x + 1
+
+        # Calculate the coordinates based on the center
+        x_pos = x + x_center
+        y_pos = y + y_center
+
+   
+        if x < y:
+            break
+
+        # Plot the points of the circle in all octants
+        x_coords.append(x + x_center)
+        y_coords.append(y + y_center)
+        x_coords.append(-x + x_center)
+        y_coords.append(y + y_center)
+        x_coords.append(x + x_center)
+        y_coords.append(-y + y_center)
+        x_coords.append(-x + x_center)
+        y_coords.append(-y + y_center)
+        x_coords.append(y + x_center)
+        y_coords.append(x + y_center)
+        x_coords.append(-y + x_center)
+        y_coords.append(x + y_center)
+        x_coords.append(y + x_center)
+        y_coords.append(-x + y_center)
+        x_coords.append(-y + x_center)
+        y_coords.append(-x + y_center)
+
+    # Plot the circle using the coordinates
+    return x_coords, y_coords
+

@@ -18,8 +18,8 @@ def stage2animate():
         update_chicken()
         for r in range(len(config.radiuses)):
             config.radiuses[r] = (config.radiuses[r]+config.speed)
-        if round(config.get_diamondX()) >= round(config.get_boat_position()[0]) and round(config.get_diamondX()) <= round(config.get_boat_position()[0]) + 60:
-            if round(config.get_diamondY()) - 9 == config.get_boat_position()[1]:
+        if round(config.get_diamondX()) >= round(config.get_boat_position()[0]) and round(config.get_diamondX()) <= round(config.get_boat_position()[0]) + 100:
+            if round(config.get_diamondY()) - 9 <= config.get_boat_position()[1] + 50 and round(config.get_diamondY()) - 9 >= config.get_boat_position()[1]:
                 config.set_points(config.get_points() + 1)
                 config.set_speed(config.get_speed() * 2)
                 config.set_random_colors(random.randint(0, 255) / 255, random.randint(0, 255) / 255, random.randint(0, 255) / 255)

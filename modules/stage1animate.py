@@ -14,8 +14,8 @@ def stage1animate():
         config.set_diamondY(config.get_diamondY() - config.get_speed())
         toggle_chicken()
         update_chicken()
-        if round(config.get_diamondX()) >= round(config.get_boat_position()[0]) and round(config.get_diamondX()) <= round(config.get_boat_position()[0]) + 60:
-            if round(config.get_diamondY()) - 9 == config.get_boat_position()[1]:
+        if round(config.get_diamondX()) >= round(config.get_boat_position()[0]) and round(config.get_diamondX()) <= round(config.get_boat_position()[0]) + 100:
+            if round(config.get_diamondY()) - 9 <= config.get_boat_position()[1] + 50 and round(config.get_diamondY()) - 9 >= config.get_boat_position()[1]:
                 config.set_points(config.get_points() + 1)
                 config.set_speed(config.get_speed() * 1.1)
                 config.set_random_colors(random.randint(0, 255) / 255, random.randint(0, 255) / 255, random.randint(0, 255) / 255)

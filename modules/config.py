@@ -10,7 +10,7 @@ class GameConfig:
         self.boatX = -250
         self.boatY = -230
         self.ballx = self.bally = 0
-        self.speed = 1
+        self.speed = 0.5
         self.ball_size = 2
         self.points = 0
         self.create_new = False
@@ -36,6 +36,8 @@ class GameConfig:
         self.boundary_y_min = -250
         self.boundary_y_max = 250
         self.stage = 1
+        self.missiles = []
+        self.chickenHealth = 3
 
     # Getters
     def get_diamondY(self):

@@ -19,6 +19,7 @@ def stage1animate():
                 config.set_points(config.get_points() + 1)
                 if(config.points>=2):
                     config.stage=2
+                    config.set_points(0)
                 config.set_speed(config.get_speed() * 1.1)
                 config.set_random_colors(random.randint(0, 255) / 255, random.randint(0, 255) / 255, random.randint(0, 255) / 255)
                 print('Score: ' + str(config.get_points()))

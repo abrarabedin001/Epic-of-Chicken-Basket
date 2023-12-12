@@ -19,6 +19,8 @@ def stage2animate():
         config.set_diamondY(config.get_diamondY() + del_y/100 - config.get_speed())
         toggle_chicken()
         update_chicken()
+        if(config.points>=2):
+            config.stage=3
         for r in range(len(config.radiuses)):
             config.radiuses[r] = (config.radiuses[r]+config.speed)
         if round(config.get_diamondX()) >= round(config.get_boat_position()[0]) and round(config.get_diamondX()) <= round(config.get_boat_position()[0]) + 100:

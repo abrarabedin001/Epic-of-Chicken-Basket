@@ -5,12 +5,14 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from modules.display1 import display1
 from modules.display2 import display2
+from modules.display3 import display3
 from modules.stage1animate import stage1animate
 from modules.stage2animate import stage2animate
 from modules.listeners import keyboardListener, mouseListener_stage2,mouseListener_stage1
 
 from modules.listeners import specialKeyListener
 from modules.config import config
+from modules.stage3animate import stage3animate
 
 def init():
     # //clear the screen
@@ -37,20 +39,26 @@ init()
 def display():
   if (config.stage == 1):
       display1()
-  else:
+  elif (config.stage == 2):
       display2()
+  else:
+      display3()
 
 
 def mouseListener(button, state, x, y):
     if (config.stage == 1):
         mouseListener_stage1(button, state, x, y)
-    else:
+    elif (config.stage == 2):
         mouseListener_stage2(button, state, x, y)
+    else:
+        mouseListener_stage2(button, state, x, y)    
 def animate():
     if (config.stage == 1):
         stage1animate()
-    else:
+    elif (config.stage == 2):
         stage2animate()
+    else:
+        stage3animate()
 
 
 

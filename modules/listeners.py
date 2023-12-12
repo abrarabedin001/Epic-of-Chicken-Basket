@@ -84,7 +84,7 @@ def mouseListener_stage2(button, state, x, y):	#/#/x, y is the x-y of the screen
 
         c_X, c_y = convert_coordinate(x, y)
         config.ballx, config.bally = c_X, c_y
-
+        shoot_missile()
         if -20 <= x-250 <= 20 and 210 <= 250-y <= 240:
             config.pause = not config.pause
         elif -230 <= x-250 <= -210 and 210 <= 250-y <= 240:

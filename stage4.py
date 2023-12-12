@@ -39,16 +39,15 @@ def display():
     draw_chicken2()
     for missile in config.missiles:
         missile.draw()
-    if(config.pause):
-      game_over_str = "Game Over!"
-      for char in game_over_str:
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ord(char))
-    # if(config.chickenHealth<=0):
-      
+    # if(config.pause):
     #   game_over_str = "Game Over!"
     #   for char in game_over_str:
-    #       glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ord(char))
-    #   config.pause = True
+    glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ord('c'))
+    if(config.chickenHealth<=0):
+      
+      print("Winner winner chicken dinner")
+
+      config.pause = True
 
     
     for r in range(len(config.centers) - 1, -1, -1):

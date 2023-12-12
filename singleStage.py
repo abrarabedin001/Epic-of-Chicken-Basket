@@ -62,12 +62,7 @@ glutIdleFunc(animate)
 glutKeyboardFunc(keyboardListener)
 glutSpecialFunc(specialKeyListener)
 glutMouseFunc(mouseListener)
-# else:
-#   glutDisplayFunc(display2) 
-#   glutIdleFunc(stage2animate) 
-#   glutKeyboardFunc(keyboardListener)
-#   glutSpecialFunc(specialKeyListener)
-#   glutMouseFunc(mouseListener_stage2)
+
 
 glutMainLoop()
    

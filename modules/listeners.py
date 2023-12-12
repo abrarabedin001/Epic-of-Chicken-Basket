@@ -4,8 +4,27 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from modules.config import GameConfig
 from modules.config import config
+class Missile:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.speed = 5
 
+    def move(self):
+        self.y += self.speed
 
+    def draw(self):
+        glColor3f(1, 0, 0)
+        glBegin(GL_TRIANGLES)
+        glVertex2f(self.x, self.y)
+        glVertex2f(self.x - 3, self.y - 10)
+        glVertex2f(self.x + 3, self.y - 10)
+        glEnd()
+
+def shoot_missile():
+    
+    missile = Missile(config.boatX+50, config.boatY+50)
+    config.missiles.append(missile)
 
 
 def convert_coordinate(x, y):
@@ -18,6 +37,8 @@ def keyboardListener(key, x, y):
         config.ball_size += 1
     if key == b's':
         config.ball_size -= 1
+    if key == b' ':
+        shoot_missile()
     glutPostRedisplay()
 
 def specialKeyListener(key, x, y):
@@ -27,9 +48,9 @@ def specialKeyListener(key, x, y):
         config.speed /= 2
     if not config.pause and not config.stop:
         if key == GLUT_KEY_RIGHT and config.boatX + 100 <= 249:
-            config.boatX += 5
+            config.boatX += 5*config.speed
         if key == GLUT_KEY_LEFT and config.boatX >= -249:
-            config.boatX -= 5
+            config.boatX -= 5*config.speed
     glutPostRedisplay()
 
 def mouseListener_stage1(button, state, x, y):

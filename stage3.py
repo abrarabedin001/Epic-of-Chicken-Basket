@@ -4,6 +4,9 @@ from OpenGL.GL import *
 import random
 import math
 
+from modules.shapes import draw_chicken2
+from modules.stage1animate import stage1animate
+
 catcherX = 200
 catcherY = 30
 eggX = random.randint(50, 350)
@@ -281,6 +284,7 @@ def display():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
     iterate()
+    draw_chicken2()
 
     for missile in missiles:
         missile.draw()
@@ -376,6 +380,7 @@ glutMouseFunc(mouseListener)
 glutSpecialFunc(specialKeyboardListener)
 glutKeyboardFunc(keyboardListener)
 glutDisplayFunc(display)
+glutIdleFunc(stage1animate) 
 glutMainLoop()
 
 

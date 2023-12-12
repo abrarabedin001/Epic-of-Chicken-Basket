@@ -26,12 +26,7 @@ def stage1animate():
                 y_origin = y_origin + config.birdY_offset
                 config.set_diamondY(y_origin)
                 config.set_diamondX(x_origin)
-            else:
-                x_origin, y_origin = config.get_chicken_position()
-
-                y_origin = y_origin + config.birdY_offset
-                config.set_diamondY(y_origin)
-                config.set_diamondX(x_origin)
+            
                 
                 # config.set_diamond_position(random.randint(-240, 240), 230)
         if round(config.get_diamondY()) - 9 < config.get_boat_position()[1]:

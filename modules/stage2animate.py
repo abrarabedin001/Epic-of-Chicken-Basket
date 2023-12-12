@@ -42,6 +42,8 @@ def stage2animate():
             y_origin = y_origin + config.birdY_offset
             config.set_diamondY(y_origin)
             config.set_diamondX(x_origin)
+        else:
+            config.set_random_colors(random.randint(0, 255) / 255, random.randint(0, 255) / 255, random.randint(0, 255) / 255)
             
                 # config.set_diamond_position(random.randint(-240, 240), 230)
         if config.get_points() < 0:

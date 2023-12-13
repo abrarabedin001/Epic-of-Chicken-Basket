@@ -435,3 +435,27 @@ def draw_basket(base_x, base_y, width, height):
     for i in range(num_vertical_weaves):
         x = base_x + i * vertical_weave_spacing
         draw_any_line(x, bottom_rim_y, x, top_rim_y)
+# শাবাব আব্দুল্লাহ্
+def draw_roman_iii():
+    # Set the color for the Roman numeral
+    glColor3f(1.0, 1.0, 1.0)
+
+    draw_any_line(-7, 20, -7, -20)
+    draw_any_line(0, 20, 0, -20)
+    draw_any_line(7, 20, 7, -20)
+
+def draw_roman_ii():
+    # Set the color for the Roman numeral
+    glColor3f(1.0, 1.0, 1.0)
+
+    draw_any_line(-5, 20, -5, -20)
+    draw_any_line(5, 20, 5, -20)
+    #Line(190, 350, 210, 350)
+
+def draw_roman_i():
+    # Set the color for the Roman numeral
+    glColor3f(1.0, 1.0, 1.0)
+
+    draw_any_line(0, 20, 0, -20)
+    #Line(190, 340, 210, 340)
+    #Line(190, 350, 210, 350)

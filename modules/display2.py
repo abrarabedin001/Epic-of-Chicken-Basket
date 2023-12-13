@@ -6,7 +6,7 @@ from OpenGL.GLU import *
 
 import math
 from modules.playPauseX import draw_pause, draw_play, draw_x
-from modules.shapes import draw_boat,  draw_chicken2, draw_circle, draw_diamond
+from modules.shapes import draw_boat,  draw_chicken2, draw_circle, draw_diamond, draw_roman_ii
 from modules.config import config
 from modules.straightline import  draw_points
 
@@ -35,6 +35,7 @@ def display2():
     draw_boat()
     # draw_bucket()    
     draw_chicken2()
+    draw_roman_ii()
 
     
     for r in range(len(config.centers) - 1, -1, -1):

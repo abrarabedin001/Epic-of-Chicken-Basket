@@ -38,7 +38,7 @@ class GameConfig:
         self.stage = 1
         self.missiles = []
         self.chickenHealth = 3
-        self.threshold = 3
+        self.threshold = 2
 
     # Getters
     def get_diamondY(self):

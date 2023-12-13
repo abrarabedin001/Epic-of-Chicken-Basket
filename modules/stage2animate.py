@@ -19,7 +19,7 @@ def stage2animate():
         config.set_diamondY(config.get_diamondY() + del_y/100 - config.get_speed())
         toggle_chicken()
         update_chicken()
-        if(config.points>=2):
+        if(config.points>=config.threshold):
             config.stage=3
         for r in range(len(config.radiuses)):
             config.radiuses[r] = (config.radiuses[r]+config.speed)

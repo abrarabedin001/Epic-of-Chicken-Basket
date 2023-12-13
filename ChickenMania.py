@@ -605,6 +605,32 @@ def draw_basket(base_x, base_y, width, height):
     for i in range(num_vertical_weaves):
         x = base_x + i * vertical_weave_spacing
         draw_any_line(x, bottom_rim_y, x, top_rim_y)
+
+def draw_roman_iii():
+    # Set the color for the Roman numeral
+    glColor3f(1.0, 1.0, 1.0)
+
+    draw_any_line(-7, 20, -7, -20)
+    draw_any_line(0, 20, 0, -20)
+    draw_any_line(7, 20, 7, -20)
+
+def draw_roman_ii():
+    # Set the color for the Roman numeral
+    glColor3f(1.0, 1.0, 1.0)
+
+    draw_any_line(-5, 20, -5, -20)
+    draw_any_line(5, 20, 5, -20)
+    #Line(190, 350, 210, 350)
+
+def draw_roman_i():
+    # Set the color for the Roman numeral
+    glColor3f(1.0, 1.0, 1.0)
+
+    draw_any_line(0, 20, 0, -20)
+    #Line(190, 340, 210, 340)
+    #Line(190, 350, 210, 350)
+
+
 # display 1
 
 def display1():
@@ -630,6 +656,7 @@ def display1():
     draw_boat()
     # draw_bucket()    
     draw_chicken2()
+    draw_roman_i()
 
     
     for r in range(len(config.centers) - 1, -1, -1):
@@ -685,7 +712,7 @@ def display2():
     draw_boat()
     # draw_bucket()    
     draw_chicken2()
-
+    draw_roman_ii()
     
     for r in range(len(config.centers) - 1, -1, -1):
         x_origin = config.centers[r][0]
@@ -735,6 +762,7 @@ def display3():
     draw_boat()
     # draw_bucket()    
     draw_chicken2()
+    draw_roman_iii()
     for missile in config.missiles:
         missile.draw()
     

@@ -440,9 +440,6 @@ def draw_roman_iii():
     # Set the color for the Roman numeral
     glColor3f(1.0, 1.0, 1.0)
 
-    
-
-    
     draw_any_line(-7, 20, -7, -20)
     draw_any_line(0, 20, 0, -20)
     draw_any_line(7, 20, 7, -20)
@@ -451,9 +448,6 @@ def draw_roman_ii():
     # Set the color for the Roman numeral
     glColor3f(1.0, 1.0, 1.0)
 
-    
-
-    
     draw_any_line(-5, 20, -5, -20)
     draw_any_line(5, 20, 5, -20)
     #Line(190, 350, 210, 350)

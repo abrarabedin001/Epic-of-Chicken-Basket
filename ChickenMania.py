@@ -1118,11 +1118,7 @@ def stage3animate():
 
 # straightLine
 
-def convert_coordinate(x, y):
-    global W_Width, W_Height
-    a = x - (W_Width / 2)
-    b = (W_Height / 2) - y
-    return a, b
+
 
 
 def draw_points(x, y, s):

@@ -4,6 +4,23 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from modules.config import GameConfig
 from modules.config import config
+from modules.straightline import draw_any_line
+# class Missile:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#         self.speed = 5
+
+#     def move(self):
+#         self.y += self.speed
+
+#     def draw(self):
+#         glColor3f(1, 0, 0)
+#         glBegin(GL_TRIANGLES)
+#         glVertex2f(self.x, self.y)
+#         glVertex2f(self.x - 3, self.y - 10)
+#         glVertex2f(self.x + 3, self.y - 10)
+#         glEnd()
 class Missile:
     def __init__(self, x, y):
         self.x = x
@@ -15,11 +32,9 @@ class Missile:
 
     def draw(self):
         glColor3f(1, 0, 0)
-        glBegin(GL_TRIANGLES)
-        glVertex2f(self.x, self.y)
-        glVertex2f(self.x - 3, self.y - 10)
-        glVertex2f(self.x + 3, self.y - 10)
-        glEnd()
+        draw_any_line(self.x, self.y, self.x, self.y - 10)
+
+
 
 def shoot_missile():
     

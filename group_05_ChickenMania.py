@@ -812,11 +812,7 @@ class Missile:
 
     def draw(self):
         glColor3f(1, 0, 0)
-        glBegin(GL_TRIANGLES)
-        glVertex2f(self.x, self.y)
-        glVertex2f(self.x - 3, self.y - 10)
-        glVertex2f(self.x + 3, self.y - 10)
-        glEnd()
+        draw_any_line(self.x, self.y, self.x, self.y - 10)
 
 def shoot_missile():
     
@@ -1118,11 +1114,7 @@ def stage3animate():
 
 # straightLine
 
-def convert_coordinate(x, y):
-    global W_Width, W_Height
-    a = x - (W_Width / 2)
-    b = (W_Height / 2) - y
-    return a, b
+
 
 
 def draw_points(x, y, s):
